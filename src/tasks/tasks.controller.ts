@@ -17,16 +17,18 @@ import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { TaskStatus } from './task-status.enum';
 import { TasksService } from './tasks.service';
 import { Task } from './task.entity';
+import { Public } from '../auth/auth.guard.disable';
 
+@Public()
 @Controller('tasks')
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
+  // @Public()
   @Get()
-  getTasks(
-    @Query(ValidationPipe) filterDto: GetTasksFilterDto,
-  ): Promise<Task[]> {
-    return this.tasksService.getTasks(filterDto);
+  getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): any {
+    return 'Hello World';
+    // return this.tasksService.getTasks(filterDto);
   }
 
   @Post()
